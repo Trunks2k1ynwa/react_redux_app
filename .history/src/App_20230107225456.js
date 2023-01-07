@@ -10,8 +10,7 @@ function App() {
       yield 3;
     }
     const gen = demoGenerator();
-    console.log(gen.next());
-    console.log(gen.return(3));
+    console.log(gen)
   }, [])
   return (
     <div className="App">

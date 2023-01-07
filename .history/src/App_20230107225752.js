@@ -11,7 +11,6 @@ function App() {
     }
     const gen = demoGenerator();
     console.log(gen.next());
-    console.log(gen.return(3));
   }, [])
   return (
     <div className="App">

@@ -1,21 +1,19 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import counterSlice from "./counterSlice.js";
-import createSagaMiddleware from 'redux-saga'
+import counterSlice, { increment, incrementByValue } from "./counterSlice.js";
 import globalSlice from "./globalSlice.js";
-const sagaMiddleware = createSagaMiddleware()
+
 const reducer = combineReducers({
   counter: counterSlice,
   global: globalSlice,
 });
 // My custom middleware to logger custom state
 const loggerMiddleware = (store)=>(next)=>(action)=>{
-    // console.log(action);
+    console.log(action);
     next(action);
 }
 export const store = configureStore({
   reducer,
-  middleware:(gDM) => gDM().concat(logger,sagaMiddleware),
+  middleware:(gDM) => gDM().concat(loggerMiddleware),
 });
 // const loggerMiddleware = function(store){
 //     return function(next){
@@ -25,7 +23,9 @@ export const store = configureStore({
 //     }
 // }
 store.subscribe(() => {
-  // console.log("current state: " + store.getState().counter.count);
+  console.log("current state: " + store.getState().counter.count);
 });
-// store.dispatch(incrementByValue(1));
+store.dispatch(incrementByValue(1));
+store.dispatch(incrementByValue(3));
+store.dispatch(incrementByValue(5));
 export default store;

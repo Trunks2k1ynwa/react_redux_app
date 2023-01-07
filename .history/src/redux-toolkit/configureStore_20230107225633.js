@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import counterSlice from "./counterSlice.js";
+import counterSlice, { increment, incrementByValue } from "./counterSlice.js";
 import createSagaMiddleware from 'redux-saga'
 import globalSlice from "./globalSlice.js";
 const sagaMiddleware = createSagaMiddleware()
