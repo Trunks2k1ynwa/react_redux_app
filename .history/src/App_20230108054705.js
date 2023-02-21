@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getNews } from "./sagas/news/newSlice.js";
-import HackerNews from "./uis/HackerNews.js";
+import { useDispatch } from "react-redux";
 
 function App() {
   //Generator function
@@ -16,14 +13,8 @@ function App() {
   //   console.log(gen.return(3));
   // }, [])
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getNews());
-  }, [dispatch]);
-  const hits = useSelector(state=>state.news.hits)
-  console.log("🚀 ~ hits", hits)
   return (
     <div className="App">
-    <HackerNews></HackerNews>
     </div>
   );
 }

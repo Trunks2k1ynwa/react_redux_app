@@ -1,25 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { getNews, otherAction, setQuery } from "../sagas/news/newSlice.js";
+import { getNews, setQuery } from "../sagas/news/newSlice.js";
 import { debounce } from "lodash";
-import { handleFetchNews } from "../redux-thunk/newsSlice.js";
 // import lodash from 'lodash'
 // https://hn.algolia.com/api/v1/search?query=react
 const HackerNews = () => {
   const { hits, loading, query } = useSelector((state) => state.news);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(handleFetchNews("css"));
+    dispatch(getNews(query));
   }, [dispatch, query]);
-  // useEffect(() => {
-  //   dispatch(getNews(query));
-  // }, [dispatch, query]);
   const handleChangeQuery = debounce((e) => {
-    // dispatch(setQuery(e.target.value));
+    dispatch(setQuery(e.target.value));
   }, 250);
-  const handleSetLoading = ()=>{
-    // dispatch(otherAction({payload:true}))
-  }
   return (
     <div className="w-2/4 p-5 mx-auto mt-5 bg-white rounded-lg shadow-md">
       <div className="flex mb-5 gap-x-5 ">
@@ -32,7 +25,9 @@ const HackerNews = () => {
         />
         <button
           className="p-5 text-white bg-blue-500 rounded-md font-semibold-600"
-          onClick={handleSetLoading}
+          onClick={() =>
+            setUrl(`https://hn.algolia.com/api/v1/search?query=${query}`)
+          }
         >
           Fetching...
         </button>
@@ -40,8 +35,8 @@ const HackerNews = () => {
       {!loading && (
         <div className="w-8 h-8 mx-auto my-10 border-4 border-r-4 border-blue-500 rounded-full border-r-transparent animate-spin"></div>
       )}
-      {loading && 
-      (<div className="flex flex-wrap gap-5">
+      {!loading}
+      <div className="flex flex-wrap gap-5">
         {loading &&
           hits.length > 0 &&
           hits.map((item, index) => {
@@ -52,8 +47,7 @@ const HackerNews = () => {
               </h3>
             );
           })}
-      </div>)
-      }
+      </div>
     </div>
   );
 };

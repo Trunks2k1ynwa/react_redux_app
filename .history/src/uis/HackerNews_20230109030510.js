@@ -40,8 +40,8 @@ const HackerNews = () => {
       {!loading && (
         <div className="w-8 h-8 mx-auto my-10 border-4 border-r-4 border-blue-500 rounded-full border-r-transparent animate-spin"></div>
       )}
-      {loading && 
-      (<div className="flex flex-wrap gap-5">
+      {!loading}
+      <div className="flex flex-wrap gap-5">
         {loading &&
           hits.length > 0 &&
           hits.map((item, index) => {
@@ -52,8 +52,7 @@ const HackerNews = () => {
               </h3>
             );
           })}
-      </div>)
-      }
+      </div>
     </div>
   );
 };
