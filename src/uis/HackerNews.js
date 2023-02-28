@@ -8,9 +8,9 @@ import { handleFetchNews } from "../redux-thunk/newsSlice.js";
 const HackerNews = () => {
   const { hits, loading, query } = useSelector((state) => state.news);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(handleFetchNews("css"));
-  }, [dispatch, query]);
+  // useEffect(() => {
+  //   dispatch(handleFetchNews("css"));
+  // }, [dispatch, query]);
   // useEffect(() => {
   //   dispatch(getNews(query));
   // }, [dispatch, query]);

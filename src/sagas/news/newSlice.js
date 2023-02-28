@@ -7,6 +7,7 @@ const newsSlice = createSlice({
         hits:[],
         loading:true,
         query:"",
+        error:false
     },
     reducers: {
         setQuery:(state,action)=>({
@@ -21,8 +22,11 @@ const newsSlice = createSlice({
         setLoading:(state,action)=>({
             ...state,
             loading:action.payload
+        }),
+        setErrorMessage:(state,action)=>({
+            ...state,
+            error:action.payload
         })
-
     },
     extraReducers : (builder)=>{
         builder.addCase(otherAction,(state,action)=>{
@@ -30,5 +34,5 @@ const newsSlice = createSlice({
         });
     },
 });
-export const {setNews,getNews,setLoading,setQuery} = newsSlice.actions;
+export const {setNews,getNews,setLoading,setQuery,setErrorMessage} = newsSlice.actions;
 export default newsSlice.reducer;

@@ -8,7 +8,6 @@ export default function* handleGetNews({ payload, type }) {
   try {
     const newsQuery = yield select((state) => state.news.query);
     newsQuery ? (query = payload) : (query = "react");
-    console.log("🚀 ~ query", query);
     const response = yield call(requestGetNews, query);
     const { hits } = response.data;
     yield put(setNews(hits));

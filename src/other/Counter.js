@@ -2,19 +2,23 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useDarkMode from "../components/hook/useDarkMode.js";
 import {
+  changeUser,
   decrement,
   increment,
   incrementByValue,
 } from "../redux-toolkit/counterSlice.js";
 import { toggleDarkMode } from "../redux-toolkit/globalSlice.js";
+import User from "./User.js";
 
 const Counter = () => {
   // useSelector = createStore; state = reducer
   const count = useSelector((state) => state.counter.count);
+  // console.log(count)
   const dispatch = useDispatch();
   const handleIncrement = () => {
     // = counterReducer(increment())
     dispatch(increment());
+    dispatch(changeUser({name:"Nam",age:10}))
   };
   const handleDecrement = () => {
     dispatch(decrement());
@@ -44,8 +48,9 @@ const Counter = () => {
         >
           Increase by 10
         </button>
-        <SwitchDarkMode></SwitchDarkMode>
+        {/* <SwitchDarkMode></SwitchDarkMode> */}
       </div>
+
     </div>
   );
 };
