@@ -7,19 +7,15 @@ import { getNews } from "./sagas/news/newSlice.js";
 import HackerNews from "./uis/HackerNews.js";
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getNews());
-  }, [dispatch]);
-  const hits = useSelector((state)=>state.news.hits)
-  console.log(hits)
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getNews());
+  // }, [dispatch]);
+  // const hits = useSelector((state) => state.news.hits);
+  // console.log(hits);
   return (
     <div className="App">
-    {/* <Provider store={store}> */}
-    {/* <Counter></Counter> */}
-    {/* <User></User> */}
-    {/* <HackerNews></HackerNews> */}
-    {/* </Provider> */}
+      <HackerNews></HackerNews>
     </div>
   );
 }

@@ -1,23 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
+import newSlice from "../sagas/news/newSlice.js";
 // import { latest } from "immer/dist/internal.js";
 import requestGetNews from "../sagas/news/request.js";
+import { handleFetchNews } from "./handlers.js";
 
-export const handleFetchNews = createAsyncThunk(
-  "news/handleFetchNews",
-  async (query, thunkAPi) => {
-    const response = await requestGetNews(query);
-    return response.data.hits;
-  }
-);
+export const setLoading2 = createAction("setLoading");
+
 const initialState = {
   hits: [],
-  loading: true,
+  loading: false,
   query: "",
 };
 const newsSlice = createSlice({
   name: "news",
   initialState,
-  reducer: {},
+  reducers: {
+    setLoading: (state, action) => ({
+      ...state,
+      loading: action.payload,
+    }),
+  },
   extraReducers: (builder) => {
     builder
       .addCase(handleFetchNews.fulfilled, (state, action) => {
@@ -29,8 +31,11 @@ const newsSlice = createSlice({
       })
       .addCase(handleFetchNews.rejected, (state, action) => {
         state.loading = false;
+      })
+      .addCase(setLoading2, (state, action) => {
+        state.loading = action.payload;
       });
   },
 });
-
+export const { setLoading } = newsSlice.actions;
 export default newsSlice.reducer;
